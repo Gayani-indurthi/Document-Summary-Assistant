@@ -1,0 +1,133 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Summary Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Document Summary Assistant</h1>
+        <p>Upload a PDF or image (JPG/PNG) document to get an AI-generated summary.</p>
+
+        <form id="upload-form" enctype="multipart/form-data">
+            <div class="upload-area">
+                <input type="file" id="file-input" name="file" accept=".pdf,.jpg,.jpeg,.png" required>
+                <label for="file-input" class="upload-label">
+                    <div class="upload-icon">📄</div>
+                    <div class="upload-text">Choose a file or drag it here</div>
+                    <div class="upload-hint">PDF, JPG, PNG up to 16MB</div>
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary">Generate Summary</button>
+        </form>
+
+        <div id="loading" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Processing your document...</p>
+        </div>
+
+        <div id="result" class="result" style="display: none;">
+            <h2>Summary</h2>
+            <div id="summary-content"></div>
+        </div>
+
+        <div id="error" class="error" style="display: none;">
+            <h2>Error</h2>
+            <p id="error-message"></p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Summary Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="dark-mode">
+    <div class="theme-toggle">
+        <input type="checkbox" id="theme-switch">
+        <label for="theme-switch" class="switch"></label>
+    </div>
+
+    <div class="wrapper">
+        <header>
+            <h1>📘 Document Summary Assistant</h1>
+            <p>Upload your document and get a quick, AI-generated summary instantly!</p>
+        </header>
+
+        <main>
+            <form id="upload-form" enctype="multipart/form-data" class="card">
+                <div class="upload-area" id="upload-area">
+                    <input type="file" id="file-input" name="file" accept=".pdf,.jpg,.jpeg,.png" required>
+                    <label for="file-input" class="upload-label">
+                        <div class="upload-icon">📄</div>
+                        <h3>Drag & Drop or Click to Upload</h3>
+                        <p>Supports PDF, JPG, PNG up to 16MB</p>
+                    </label>
+                </div>
+
+                <div class="length-selector">
+                    <label for="length-select">Summary Length:</label>
+                    <select id="length-select" name="length">
+                        <option value="short">Short</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="long">Long</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn">✨ Generate Summary</button>
+            </form>
+
+            <div id="loading" class="loading hidden">
+                <div class="spinner"></div>
+                <p>Analyzing your document...</p>
+            </div>
+
+            <div id="result" class="result hidden">
+                <h2>📝 Summary</h2>
+                <div id="summary-content"></div>
+            </div>
+
+            <div id="error" class="error hidden">
+                <h2>⚠️ Error</h2>
+                <p id="error-message"></p>
+            </div>
+        </main>
+
+        <footer>
+            <p>Made with 💙 using Flask & Gemini AI</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+    <script>
+        // 🌗 Dark/Light Mode Toggle
+        const toggle = document.getElementById('theme-switch');
+        const body = document.body;
+
+        toggle.addEventListener('change', () => {
+            body.classList.toggle('dark-mode');
+            body.classList.toggle('light-mode');
+            localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
+        });
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            body.classList.remove('dark-mode');
+            body.classList.add('light-mode');
+            toggle.checked = true;
+        }
+    </script>
+</body>
+</html>
